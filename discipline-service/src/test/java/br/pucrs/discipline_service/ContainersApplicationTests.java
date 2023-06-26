@@ -1,4 +1,4 @@
-package br.pucrs.student_service;
+package br.pucrs.discipline_service;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

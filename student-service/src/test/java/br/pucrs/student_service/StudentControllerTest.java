@@ -73,17 +73,17 @@ public class StudentControllerTest {
         verify(service, times(1)).findByNameContaining(anyString());
     }
 
-    @Test
-    public void getStudentClassesTest() throws Exception {
-        Student student = new Student();
-        Discipline discipline1 = new Discipline(); 
-        Discipline discipline2 = new Discipline();
-        student.setDisciplines(Arrays.asList(discipline1, discipline2));
-        when(service.findById(anyLong())).thenReturn(student);
+//     @Test
+//     public void getStudentClassesTest() throws Exception {
+//         Student student = new Student();
+//         Discipline discipline1 = new Discipline(); 
+//         Discipline discipline2 = new Discipline();
+//         student.setDisciplines(Arrays.asList(discipline1, discipline2));
+//         when(service.findById(anyLong())).thenReturn(student);
 
-        mockMvc.perform(get("/student/getClasses/12345"))
-                .andExpect(status().isOk());
+//         mockMvc.perform(get("/student/getClasses/12345"))
+//                 .andExpect(status().isOk());
 
-        verify(service, times(1)).getStudentDisciplines(anyLong());
-    }
+//         verify(service, times(1)).getStudentDisciplines(anyLong());
+//     }
 }

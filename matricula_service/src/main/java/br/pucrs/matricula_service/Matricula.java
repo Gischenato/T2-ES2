@@ -1,16 +1,10 @@
-package br.pucrs.student_service;
-
-
-import java.util.List;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+package br.pucrs.matricula_service;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -23,15 +17,16 @@ import lombok.Setter;
 @Setter
 @Getter
 @Builder
-public class Student {
+public class Matricula {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    long id;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	long registrationNumber;
-    
-	@Column(nullable = false)
-	String name;
+    @Column(nullable = false)
+    long studentRegistrationNumber;
 
-	@Column(nullable = false)
-	String documentNumber;
+    @Column(nullable = false)
+    long disciplineId;
+
+    // outros campos se necessários, por exemplo a data de matrícula
 }

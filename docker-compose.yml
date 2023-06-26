@@ -1,15 +1,35 @@
 version: '3'
 
 services:
-  db: 
+  students_db: 
     image: postgres
     restart: always
     environment:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: admin
-      POSTGRES_DB: testdb
+      POSTGRES_DB: students
     ports:
       - 5432:5432
+
+  disciplines_db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: disciplines
+    ports:
+      - 5433:5432
+
+  matriculas_db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: matriculas
+    ports:
+      - 5434:5432
 
   # api:
   #   build: ./containers

@@ -37,15 +37,15 @@ public class StudentService {
         repository.save(student);
     }
 
-    public List<StudentDisciplinesDTO> getStudentDisciplines(long id) {
-        Student student = findById(id);
-        List<Discipline> disciplines = student.getDisciplines();
-        LinkedList<StudentDisciplinesDTO> disciplinesList = new LinkedList<StudentDisciplinesDTO>();
+//     public List<StudentDisciplinesDTO> getStudentDisciplines(long id) {
+//         Student student = findById(id);
+//         List<Discipline> disciplines = student.getDisciplines();
+//         LinkedList<StudentDisciplinesDTO> disciplinesList = new LinkedList<StudentDisciplinesDTO>();
 
-        for (Discipline d : disciplines) {
-            disciplinesList.add(new StudentDisciplinesDTO(d));
-        }
+//         for (Discipline d : disciplines) {
+//             disciplinesList.add(new StudentDisciplinesDTO(d));
+//         }
 
-        return disciplinesList;
-    }
+//         return disciplinesList;
+//     }
 }

@@ -57,16 +57,16 @@ public class StudentController {
 		return ResponseEntity.ok(students);
 	}
 
-    @GetMapping("/getClasses/{registrationNumber}")
-    public ResponseEntity<List<StudentDisciplinesDTO>> getStudentClasses(@PathVariable String registrationNumber) {
-        try {
-            long regNmb = Long.parseLong(registrationNumber);
-            List<StudentDisciplinesDTO> disciplinesList = service.getStudentDisciplines(regNmb);
-            return ResponseEntity.ok(disciplinesList);
-        } catch (StudentNotFoundException e) {
-            return ResponseEntity.notFound().build();
-        } catch (NumberFormatException e) {
-            return ResponseEntity.badRequest().build();
-        }
-    }
+//     @GetMapping("/getClasses/{registrationNumber}")
+//     public ResponseEntity<List<StudentDisciplinesDTO>> getStudentClasses(@PathVariable String registrationNumber) {
+//         try {
+//             long regNmb = Long.parseLong(registrationNumber);
+//             List<StudentDisciplinesDTO> disciplinesList = service.getStudentDisciplines(regNmb);
+//             return ResponseEntity.ok(disciplinesList);
+//         } catch (StudentNotFoundException e) {
+//             return ResponseEntity.notFound().build();
+//         } catch (NumberFormatException e) {
+//             return ResponseEntity.badRequest().build();
+//         }
+//     }
 }
