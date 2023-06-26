@@ -50,6 +50,18 @@ public class StudentController {
         }
 	}
 
+    @GetMapping("/find/document/{documentNumber}")
+	public ResponseEntity<Student> getStudentByDocumentNumber(@PathVariable String documentNumber) {
+		try {
+            Student student = this.service.findByDocumentNumber(documentNumber);
+            return ResponseEntity.ok(student);
+        } catch (StudentNotFoundException e) {
+            return ResponseEntity.notFound().build();
+        } catch (NumberFormatException e) {
+            return ResponseEntity.badRequest().build();
+        }
+	}
+
 	@GetMapping("/findByName/{name}")
 	public ResponseEntity<List<Student>> getStudentByName(@PathVariable String name) {
 		List<Student> students = service.findByNameContaining(name);
@@ -57,16 +69,4 @@ public class StudentController {
 		return ResponseEntity.ok(students);
 	}
 
-//     @GetMapping("/getClasses/{registrationNumber}")
-//     public ResponseEntity<List<StudentDisciplinesDTO>> getStudentClasses(@PathVariable String registrationNumber) {
-//         try {
-//             long regNmb = Long.parseLong(registrationNumber);
-//             List<StudentDisciplinesDTO> disciplinesList = service.getStudentDisciplines(regNmb);
-//             return ResponseEntity.ok(disciplinesList);
-//         } catch (StudentNotFoundException e) {
-//             return ResponseEntity.notFound().build();
-//         } catch (NumberFormatException e) {
-//             return ResponseEntity.badRequest().build();
-//         }
-//     }
 }

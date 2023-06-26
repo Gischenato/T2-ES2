@@ -1,5 +1,4 @@
 package br.pucrs.student_service;
-import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
@@ -30,22 +29,15 @@ public class StudentService {
         return repository.findByNameContainingIgnoreCase(name);
     }
 
+    public Student findByDocumentNumber(String documentNumber) {
+        return repository.findByDocumentNumber(documentNumber)
+            .orElseThrow(() -> new StudentNotFoundException("Student not found"));
+    }
+
     public void registerStudent(Student student) {
         if(repository.findByDocumentNumber(student.getDocumentNumber()).isPresent()){
             throw new StudentAlreadyRegisteredException("Student already registered");
         }
         repository.save(student);
     }
-
-//     public List<StudentDisciplinesDTO> getStudentDisciplines(long id) {
-//         Student student = findById(id);
-//         List<Discipline> disciplines = student.getDisciplines();
-//         LinkedList<StudentDisciplinesDTO> disciplinesList = new LinkedList<StudentDisciplinesDTO>();
-
-//         for (Discipline d : disciplines) {
-//             disciplinesList.add(new StudentDisciplinesDTO(d));
-//         }
-
-//         return disciplinesList;
-//     }
 }
