@@ -25,6 +25,10 @@ public class StudentService {
         return repository.findAll();
     }
 
+    public List<Student> findAllById(List<Long> ids) {
+        return repository.findAllById(ids);
+    }
+
     public List<Student> findByNameContaining(String name) {
         return repository.findByNameContainingIgnoreCase(name);
     }

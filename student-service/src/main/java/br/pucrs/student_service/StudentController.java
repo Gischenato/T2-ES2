@@ -37,6 +37,11 @@ public class StudentController {
 		return this.service.findAll();
 	}
 
+    @PostMapping("/find/bulk")
+    public List<Student> getStudentsById(@RequestBody List<Long> ids) {
+        return this.service.findAllById(ids);
+    }
+
 	@GetMapping("/find/{registrationNumber}")
 	public ResponseEntity<Student> getStudentByRegistrationNumber(@PathVariable String registrationNumber) {
 		try {
