@@ -1,4 +1,5 @@
 package br.pucrs.discipline_service;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
@@ -21,6 +22,25 @@ public class DisciplineService {
 
     public List<Discipline> findAll() {
         return repository.findAll();
+    }
+
+    public Discipline findByClassCodeAndTurma(String classCode, String turma) throws DisciplineNotFoundException {
+        Discipline discipline = repository.findByClassCodeAndTurma(classCode, turma)
+        .orElseThrow(() -> new DisciplineNotFoundException("Discipline not found"));
+        return discipline;
+    }
+
+    public List<Discipline> findAllByClassCodeAndTurma(List<ClassCodeAndTurmaDTO> classCodesAndTurmas) {
+        List<Discipline> disciplines = new LinkedList<>();
+        for (ClassCodeAndTurmaDTO classCodeAndTurma : classCodesAndTurmas) {
+            String classCode = classCodeAndTurma.getClassCode();
+            String turma = classCodeAndTurma.getTurma();
+            Discipline discipline = repository.findByClassCodeAndTurma(classCode, turma)
+            .orElse(null);
+            if (discipline == null) continue;
+            disciplines.add(discipline);
+        }
+        return disciplines;
     }
 
     public void registerDiscipline(Discipline discipline) {

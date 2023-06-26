@@ -1,5 +1,6 @@
 package br.pucrs.matricula_service;
 
+import br.pucrs.matricula_service.models.ClassCodeAndTurmaDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -23,10 +24,15 @@ public class Matricula {
     long id;
 
     @Column(nullable = false)
-    long studentRegistrationNumber;
+    String studentRegistrationNumber;
 
     @Column(nullable = false)
-    long disciplineId;
+    String classCode;;
 
-    // outros campos se necessários, por exemplo a data de matrícula
+    @Column(nullable = false)
+    String turma;
+
+    public ClassCodeAndTurmaDTO getClassCodeAndTurmaDTO() {
+        return new ClassCodeAndTurmaDTO(classCode, turma);
+    }
 }
