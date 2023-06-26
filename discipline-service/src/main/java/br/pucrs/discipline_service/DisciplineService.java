@@ -1,5 +1,4 @@
 package br.pucrs.discipline_service;
-import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
