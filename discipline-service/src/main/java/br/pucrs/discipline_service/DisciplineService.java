@@ -24,8 +24,19 @@ public class DisciplineService {
     }
 
     public void registerDiscipline(Discipline discipline) {
-        if (repository.existsById(discipline.getId())) {
-            throw new DisciplineAlreadyRegisteredException("Discipline already registered");
+        List<Discipline> disciplines = repository.findByClassCode(discipline.getClassCode());
+        if (disciplines.size() > 0) {
+            String name = disciplines.get(0).getName();
+            if (!name.equalsIgnoreCase(discipline.getName())) {
+                String error = "Classcode " + discipline.getClassCode() + " already registered with name " + name;
+                throw new DisciplineAlreadyRegisteredException(error);
+            }
+        }
+
+        for (Discipline d : disciplines) {
+            if (d.getTurma().equals(discipline.getTurma())) {
+                throw new DisciplineAlreadyRegisteredException("Discipline already registered");
+            }
         }
         repository.save(discipline);
     }
