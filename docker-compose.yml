@@ -36,6 +36,11 @@ services:
       - 5434:5432
     volumes:
       - matriculas_data:/var/lib/postgresql/data
+  
+  adminer:
+    image: adminer
+    ports:
+      - 8080:8080
 
 volumes:
   students_data:
