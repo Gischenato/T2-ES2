@@ -10,48 +10,70 @@ services:
       POSTGRES_DB: students
     ports:
       - 5432:5432
+    expose:
+      - 5432
     volumes:
       - students_data:/var/lib/postgresql/data
     networks:
       - students-network
 
-  # disciplines_db:
-  #   image: postgres
-  #   restart: always
-  #   environment:
-  #     POSTGRES_USER: admin
-  #     POSTGRES_PASSWORD: admin
-  #     POSTGRES_DB: disciplines
-  #   ports:
-  #     - 5433:5432
-  #   volumes:
-  #     - disciplines_data:/var/lib/postgresql/data
-
-  # matriculas_db:
-  #   image: postgres
-  #   restart: always
-  #   environment:
-  #     POSTGRES_USER: admin
-  #     POSTGRES_PASSWORD: admin
-  #     POSTGRES_DB: matriculas
-  #   ports:
-  #     - 5434:5432
-  #   volumes:
-  #     - matriculas_data:/var/lib/postgresql/data
-  
-  # adminer:
-  #   image: adminer
-  #   ports:
-  #     - 8080:8080
-
-  student_api:
-    build: ./student-service
+  disciplines_db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: disciplines
     ports:
-      - 8081:8081
-    depends_on:
-      - students_db
-    networks:
-      - students-network
+      - 5433:5432
+    expose:
+      - 5432
+    volumes:
+      - disciplines_data:/var/lib/postgresql/data
+
+  matriculas_db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: matriculas
+    ports:
+      - 5434:5432
+    expose:
+      - 5432
+    volumes:
+      - matriculas_data:/var/lib/postgresql/data
+
+  users_db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: users
+    ports:
+      - 5435:5432
+    expose:
+      - 5432
+    volumes:
+      - users_data:/var/lib/postgresql/data
+  
+  adminer:
+    image: adminer
+    ports:
+      - 8080:8080
+
+  # student_api:
+  #   build: ./student-service
+  #   ports:
+  #     - 8081:8081
+  #   expose:
+  #     - 8081
+  #   depends_on:
+  #     - students_db
+  #   networks:
+  #     - students-network
 
   # discipline_api:
   #   build: ./discipline-service
@@ -61,9 +83,16 @@ services:
   #     - disciplines_db
     
   # matricula_api:
-  #   build: ./matricula_service
+  #   build: ./matricula-service
   #   ports:
   #     - 8083:8083
+  #   depends_on:
+  #     - matriculas_db
+
+  # user_api:
+  #   build: ./user-service
+  #   ports:
+  #     - 8084:8084
   #   depends_on:
   #     - matriculas_db
 
@@ -71,14 +100,8 @@ volumes:
   students_data:
   disciplines_data:
   matriculas_data:
+  users_data:
 
 networks:
   students-network:
     driver: bridge
-
-  # api:
-  #   build: ./containers
-  #   ports:
-  #     - 8081:8081
-  #   depends_on:
-  #     - db
