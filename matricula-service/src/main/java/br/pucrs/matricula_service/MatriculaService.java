@@ -22,7 +22,7 @@ public class MatriculaService {
     private final StudentClient studentClient;
     private final DisciplineClient disciplineClient;
 
-    private Student getStudentByRegistrationNumber(String registrationNumber) throws NotFoundException {
+    protected Student getStudentByRegistrationNumber(String registrationNumber) throws NotFoundException {
         try {
             return studentClient.getStudentByRegistrationNumber(registrationNumber);
         } catch (FeignException e) {
@@ -33,7 +33,7 @@ public class MatriculaService {
         }
     }
 
-    private List<Student> getStudentsById(List<String> ids) throws NotFoundException {
+    protected List<Student> getStudentsById(List<String> ids) throws NotFoundException {
         try {
             return studentClient.getStudentsById(ids);
         } catch (FeignException e) {
@@ -47,7 +47,7 @@ public class MatriculaService {
         }
     }
 
-    private Discipline getDisciplineByClassCodeAndTurma(String classCode, String turma) throws NotFoundException {
+    protected Discipline getDisciplineByClassCodeAndTurma(String classCode, String turma) throws NotFoundException {
         try {
             return disciplineClient.getDisciplineByClassCodeAndTurma(classCode, turma);
         } catch (FeignException e) {
@@ -58,7 +58,7 @@ public class MatriculaService {
         }
     }
 
-    private List<Discipline> getDisciplinesByClassCodeAndTurma(List<ClassCodeAndTurmaDTO> codes) throws NotFoundException {
+    protected List<Discipline> getDisciplinesByClassCodeAndTurma(List<ClassCodeAndTurmaDTO> codes) throws NotFoundException {
         try {
             return disciplineClient.getAllDisciplinesByClassCodeAndTurma(codes);
         } catch (FeignException e) {

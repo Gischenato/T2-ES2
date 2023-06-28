@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>br.pucrs</groupId>
-	<artifactId>matricula_service</artifactId>
+	<artifactId>matricula-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>matricula_service</name>
+	<name>matricula-service</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>17</java.version>
