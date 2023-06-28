@@ -10,12 +10,10 @@ services:
       POSTGRES_DB: students
     ports:
       - 5432:5432
-    expose:
-      - 5432
     volumes:
       - students_data:/var/lib/postgresql/data
-    networks:
-      - students-network
+    # networks:
+    #   - students-network
 
   disciplines_db:
     image: postgres
@@ -26,8 +24,6 @@ services:
       POSTGRES_DB: disciplines
     ports:
       - 5433:5432
-    expose:
-      - 5432
     volumes:
       - disciplines_data:/var/lib/postgresql/data
 
@@ -40,8 +36,6 @@ services:
       POSTGRES_DB: matriculas
     ports:
       - 5434:5432
-    expose:
-      - 5432
     volumes:
       - matriculas_data:/var/lib/postgresql/data
 
@@ -62,18 +56,18 @@ services:
   adminer:
     image: adminer
     ports:
-      - 8080:8080
+      - 8070:8080
 
-  # student_api:
-  #   build: ./student-service
-  #   ports:
-  #     - 8081:8081
-  #   expose:
-  #     - 8081
-  #   depends_on:
-  #     - students_db
-  #   networks:
-  #     - students-network
+  student_api:
+    build: ./student-service
+    ports:
+      - 8081:8081
+    expose:
+      - 8081
+    depends_on:
+      - students_db
+    # networks:
+    #   - students-network
 
   # discipline_api:
   #   build: ./discipline-service
@@ -102,6 +96,6 @@ volumes:
   matriculas_data:
   users_data:
 
-networks:
-  students-network:
-    driver: bridge
+# networks:
+#   students-network:
+#     driver: bridge
