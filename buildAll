@@ -1,8 +1,11 @@
 cd discipline-service
 mvn clean package -DskipTests
 
-cd ../matricula_service
+cd ../matricula-service
 mvn clean package -DskipTests
 
 cd ../student-service
+mvn clean package -DskipTests
+
+cd ../user-service
 mvn clean package -DskipTests
