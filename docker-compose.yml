@@ -10,12 +10,10 @@ services:
       POSTGRES_DB: students
     ports:
       - 5432:5432
-    expose:
-      - 5432
     volumes:
       - students_data:/var/lib/postgresql/data
     networks:
-      - students-network
+      - student-network
 
   disciplines_db:
     image: postgres
@@ -26,10 +24,10 @@ services:
       POSTGRES_DB: disciplines
     ports:
       - 5433:5432
-    expose:
-      - 5432
     volumes:
       - disciplines_data:/var/lib/postgresql/data
+    networks:
+      - discipline_network
 
   matriculas_db:
     image: postgres
@@ -40,10 +38,11 @@ services:
       POSTGRES_DB: matriculas
     ports:
       - 5434:5432
-    expose:
-      - 5432
     volumes:
       - matriculas_data:/var/lib/postgresql/data
+    networks:
+      - matricula_network
+
 
   users_db:
     image: postgres
@@ -54,47 +53,51 @@ services:
       POSTGRES_DB: users
     ports:
       - 5435:5432
-    expose:
-      - 5432
     volumes:
       - users_data:/var/lib/postgresql/data
+    networks:
+      - user_network
   
   adminer:
     image: adminer
     ports:
       - 8080:8080
 
-  # student_api:
-  #   build: ./student-service
-  #   ports:
-  #     - 8081:8081
-  #   expose:
-  #     - 8081
-  #   depends_on:
-  #     - students_db
-  #   networks:
-  #     - students-network
+  student_api:
+    build: ./student-service
+    ports:
+      - 8081:8081
+    depends_on:
+      - students_db
+    networks:
+      - student-network
 
-  # discipline_api:
-  #   build: ./discipline-service
-  #   ports:
-  #     - 8082:8082
-  #   depends_on:
-  #     - disciplines_db
+  discipline_api:
+    build: ./discipline-service
+    ports:
+      - 8082:8082
+    depends_on:
+      - disciplines_db
+    networks:
+      - discipline_network
     
-  # matricula_api:
-  #   build: ./matricula-service
-  #   ports:
-  #     - 8083:8083
-  #   depends_on:
-  #     - matriculas_db
-
-  # user_api:
-  #   build: ./user-service
-  #   ports:
-  #     - 8084:8084
-  #   depends_on:
-  #     - matriculas_db
+  matricula_api:
+    build: ./matricula-service
+    ports:
+      - 8083:8083
+    depends_on:
+      - matriculas_db
+    networks:
+      - matricula_network
+    
+  user_api:
+    build: ./user-service
+    ports:
+      - 8084:8084
+    depends_on:
+      - matriculas_db
+    networks:
+      - user_network
 
 volumes:
   students_data:
@@ -103,5 +106,11 @@ volumes:
   users_data:
 
 networks:
-  students-network:
+  student-network:
+    driver: bridge
+  discipline_network:
+    driver: bridge
+  matricula_network:
+    driver: bridge
+  user_network:
     driver: bridge
