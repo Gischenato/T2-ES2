@@ -61,7 +61,7 @@ services:
   adminer:
     image: adminer
     ports:
-      - 8080:8080
+      - 8070:8080
 
   student_api:
     build: ./student-service
