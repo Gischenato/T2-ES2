@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "e5276fb5-d5d3-4141-8141-1e2b90cd7ba9",
+		"_postman_id": "8067ab7e-b4db-487a-8cb3-ddd8f74452e9",
 		"name": "Es2",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "21200374"
@@ -64,21 +64,21 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/student/find/:matricula",
+							"raw": "http://localhost:8081/student/find/:regNumber",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "8081",
 							"path": [
 								"student",
 								"find",
-								":matricula"
+								":regNumber"
 							],
 							"variable": [
 								{
-									"key": "matricula",
-									"value": ""
+									"key": "regNumber",
+									"value": null
 								}
 							]
 						}
@@ -210,12 +210,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/discipline/all",
+							"raw": "http://localhost:8082/discipline/all",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "8082",
 							"path": [
 								"discipline",
 								"all"
@@ -228,7 +228,31 @@
 					"name": "FindByClassCodeAndTurma",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8082/discipline/find/:classCode/:turma",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"discipline",
+								"find",
+								":classCode",
+								":turma"
+							],
+							"variable": [
+								{
+									"key": "classCode",
+									"value": null
+								},
+								{
+									"key": "turma",
+									"value": null
+								}
+							]
+						}
 					},
 					"response": []
 				},
@@ -423,7 +447,10 @@
 			"name": "Teste",
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": ""
+				}
 			},
 			"response": []
 		}
